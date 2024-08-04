@@ -2,11 +2,18 @@ import React from "react";
 import { Container } from "@mui/material";
 import DragDropFileUpload from "../../../../_metronic/layout/components/drag-and-drop/DragDropFileUpload";
 
-const QuestionBankDragDrop = () => {
-  const handleDrop = (acceptedFiles: File[]) => {
-    console.log(acceptedFiles);
-  };
+interface QuestionBankDragDropProps {
+  onFileChange: (file: File) => void;
+}
 
+const QuestionBankDragDrop: React.FC<QuestionBankDragDropProps> = ({
+  onFileChange,
+}) => {
+  const handleDrop = (acceptedFiles: File[]) => {
+    if (acceptedFiles.length > 0) {
+      onFileChange(acceptedFiles[0]);
+    }
+  };
   const acceptedFileTypes = {
     // "image/*": [".jpeg", ".png", ".jpg", ".gif"],
     // "application/pdf": [".pdf"],
